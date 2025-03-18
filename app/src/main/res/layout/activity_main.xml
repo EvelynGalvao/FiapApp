@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BC34A"
+    android:background="#E9DEDE"
     tools:context=".MainActivity" >
 
     <!-- ScrollView para permitir rolagem -->
@@ -107,7 +107,7 @@
                 android:background="@drawable/rounded_background"
                 android:gravity="center"
                 android:text="Opção de escolha"
-                android:textColor="#FFFFFF"
+                android:textColor="#46954A"
                 android:textSize="18sp"
                 android:layout_marginBottom="5dp"/>
 
@@ -120,7 +120,7 @@
                 android:background="@drawable/rounded_background"
                 android:gravity="center"
                 android:text="Opção de escolha"
-                android:textColor="#FFFFFF"
+                android:textColor="#46954A"
                 android:textSize="18sp"
                 android:layout_marginBottom="5dp"/>
 
@@ -132,7 +132,7 @@
                 android:background="@drawable/rounded_background"
                 android:gravity="center"
                 android:text="Opção de escolha"
-                android:textColor="#FFFFFF"
+                android:textColor="#46954A"
                 android:textSize="18sp"
                 android:layout_marginBottom="5dp"/>
 
