@@ -23,7 +23,7 @@
 
 
             <TextView
-                android:id="@+id/textViewNoticia3"
+                android:id="@+id/textViewNoticia1"
                 android:layout_width= "350dp"
                 android:layout_height="200dp"
                 android:textSize="20sp"
@@ -31,11 +31,11 @@
                 android:textStyle="bold"
                 android:padding="16dp"
                 android:layout_margin="16dp"
-                android:background="@drawable/nasa"
+                android:background="@drawable/img_1"
                 android:elevation="4dp" />
 
             <TextView
-                android:id="@+id/textViewNoticia4"
+                android:id="@+id/textViewNoticia2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"

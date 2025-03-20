@@ -20,7 +20,6 @@
         <activity
             android:name=".Noticia2Activity2"
             android:exported="true" />
-        <activity android:name=".Noticia1Activity" />
         <activity
             android:name=".CalendarActivity"
             android:exported="true" />

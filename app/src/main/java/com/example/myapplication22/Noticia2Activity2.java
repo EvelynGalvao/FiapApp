@@ -1,33 +1,25 @@
 package com.example.myapplication22;
 
 import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Html;
-import android.util.Log;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 public class Noticia2Activity2 extends AppCompatActivity {
 
     private TextView textView;
     private TextView textView2;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_noticia2);
+        setContentView(R.layout.activity_noticia2);  // <-- ADICIONADO
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -35,62 +27,25 @@ public class Noticia2Activity2 extends AppCompatActivity {
             return insets;
         });
 
-        // Encontrar o TextView no layout para exibir os dados da API
-        textView = findViewById(R.id.textViewNoticia3);
-        textView2 = findViewById(R.id.textViewNoticia4);
+        // Encontrar os TextViews no layout
+        textView = findViewById(R.id.textViewNoticia1);
+        textView2 = findViewById(R.id.textViewNoticia2);
 
-        // Chamar a API assim que o app abrir
-        new Noticia2Activity2.GetData().execute("https://www2.inpe.br/climaespacial/portal/o-programa-de-clima-espacial-do-instituto-national-de-pesquisas-espaciais-inpe-divulga-o-novo-aplicativo-de-compartilhamento-de-dados-e-api-para-divulgacao-de-dados-cientificos/");
+        // Verificar se os TextViews foram encontrados
+        if (textView == null || textView2 == null) {
+            throw new RuntimeException("Erro: TextViews não encontrados no layout.");
+        }
 
+        // Definir textos
+        textView.setText("Conhecimento das Espécies");
+        textView2.setText("Ignorar as espécies que habitam o seu país é escolher a cegueira diante de um ecossistema que sustenta a sua própria existência. Saber quais animais, plantas e microrganismos compartilham o território com você não é apenas um capricho de biólogos — é um ato de inteligência.\n" +
+                "\n" +
+                "A biodiversidade não é uma decoração da natureza, mas sim um mecanismo essencial para o equilíbrio ambiental, a segurança alimentar e até a economia. Cada espécie cumpre um papel: abelhas polinizam os alimentos que você come, árvores filtram o ar que você respira, predadores naturais mantêm pragas sob controle. Quando uma peça desse quebra-cabeça desaparece, os impactos chegam até você, seja na forma de desastres naturais, aumento de doenças ou colapsos agrícolas.\n" +
+                "\n" +
+                "E tem mais: conhecer a fauna e a flora do seu país te protege. Você sabe diferenciar uma planta medicinal de uma venenosa? Sabe identificar um animal inofensivo de um realmente perigoso? A ignorância, nesse caso, pode custar caro.\n" +
+                "\n" +
+                "Além disso, há uma questão de soberania. Se você não conhece sua própria biodiversidade, grandes corporações e interesses externos tomam a frente, patenteando e explorando riquezas naturais que pertencem ao seu território. Enquanto alguns dormem na ilusão de que a natureza é algo distante, outros fazem bilhões explorando sua falta de atenção.\n" +
+                "\n" +
+                "Saber quais espécies habitam seu país não é um detalhe — é uma questão de sobrevivência, de poder e de pertencimento. Se você não se importa, alguém se importa por você, e nem sempre a seu favor.");
     }
-
-
-    private class GetData extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-            try {
-                URL url = new URL(urls[0]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.setConnectTimeout(5000);
-                connection.setReadTimeout(5000);
-
-                int responseCode = connection.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
-                    reader.close();
-                    return response.toString();
-                } else {
-                    return "Erro: " + responseCode;
-                }
-            } catch (Exception e) {
-                return "Erro: " + e.getMessage();
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-
-
-            System.out.print(result);
-            // Pegando o título completo
-            String title = result.replaceAll(".*<title>(.*?)</title>.*", "$1");
-
-            // Usando regex para pegar a primeira frase (tudo antes do primeiro ponto)
-            String firstSentence = title.replaceAll("^(.*?\\.).*", "$1");
-
-            // Exibindo apenas a primeira frase no TextView
-            textView.setText(firstSentence);
-            // Pegando o primeiro parágrafo (com HTML)
-            String paragraph = result.replaceAll(".*<p>(.*?)</p>.*", "$1");
-            textView2.setText(Html.fromHtml(paragraph));
-            // Log para depuração
-            Log.d("HTML_Response", result);
-            Log.d("First_Sentence", firstSentence);
-        }
-    }}
+}
